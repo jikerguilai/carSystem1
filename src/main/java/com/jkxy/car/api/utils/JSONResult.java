@@ -94,13 +94,11 @@ public class JSONResult {
     }
 
     /**
-     *
-     * @Description: 将json结果集转化为LeeJSONResult对象
-     *                 需要转换的对象是一个类
      * @param jsonData
      * @param clazz
      * @return
-     *
+     * @Description: 将json结果集转化为LeeJSONResult对象
+     * 需要转换的对象是一个类
      */
     public static JSONResult formatToPojo(String jsonData, Class<?> clazz) {
         try {
@@ -124,11 +122,9 @@ public class JSONResult {
     }
 
     /**
-     *
-     * @Description: 没有object对象的转化
      * @param json
      * @return
-     *
+     * @Description: 没有object对象的转化
      */
     public static JSONResult format(String json) {
         try {
@@ -140,13 +136,11 @@ public class JSONResult {
     }
 
     /**
-     *
-     * @Description: Object是集合转化
-     *                 需要转换的对象是一个list
      * @param jsonData
      * @param clazz
      * @return
-     *
+     * @Description: Object是集合转化
+     * 需要转换的对象是一个list
      */
     public static JSONResult formatToList(String jsonData, Class<?> clazz) {
         try {
