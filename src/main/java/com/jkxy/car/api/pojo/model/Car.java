@@ -1,4 +1,4 @@
-package com.jkxy.car.api.pojo;
+package com.jkxy.car.api.pojo.model;
 
 
 public class Car {
@@ -7,6 +7,9 @@ public class Car {
     private String carType;
     private String price;
     private String carSeries;
+
+    // 车辆剩余数
+    private int stock;
 
     public int getId() {
         return id;
@@ -48,6 +51,17 @@ public class Car {
         this.carSeries = carSeries;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Car() {
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -56,6 +70,7 @@ public class Car {
                 ", carType='" + carType + '\'' +
                 ", price='" + price + '\'' +
                 ", carSeries='" + carSeries + '\'' +
+                ", stock=" + stock +
                 '}';
     }
 }

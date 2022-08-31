@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkxy.car.api.dao.CarCustomerDao">
+    <insert id="insertCarInfo" parameterType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        insert
+        into car_customer(carSeries,carName,addCarTime)
+        values (#{model.carSeries},#{model.carName},CURTIME())
+    </insert>
+
+    <select id="getStockCar" parameterType="java.lang.String" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select *
+        from car_customer
+        where sold=0
+          and carSeries=#{carSeries}
+    </select>
+
+    <update id="buyCar" parameterType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        update car_customer
+        set buyCarTime=CURTIME(),customer=#{model.customer},sold=#{model.sold}
+        where id=#{model.id}
+    </update>
+
+    <select id="getStockByIds" parameterType="java.util.ArrayList" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select * from car_customer where
+        <foreach collection ="list" item="item" separator ="or">
+            id=#{item}
+        </foreach>
+    </select>
+</mapper>

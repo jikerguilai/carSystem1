@@ -49,6 +49,18 @@ public class JSONResult {
         return new JSONResult(555, msg, null);
     }
 
+    public static JSONResult errorParamMsg(String msg) {
+        return new JSONResult(503, msg, null);
+    }
+
+    public static JSONResult errorResultMsg(String msg) {
+        return new JSONResult(504, msg, null);
+    }
+
+    public static JSONResult blankDatabaseMsg(String msg) {
+        return new JSONResult(601, msg, null);
+    }
+
     public JSONResult() {
 
     }

@@ -1,13 +1,15 @@
 package com.jkxy.car.api.controller;
 
-import com.jkxy.car.api.pojo.Car;
+import com.jkxy.car.api.pojo.dto.AddStockDto;
+import com.jkxy.car.api.pojo.dto.BuyCarDto;
+import com.jkxy.car.api.pojo.model.Car;
 import com.jkxy.car.api.service.CarService;
 import com.jkxy.car.api.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-
 
 
 @RestController
@@ -84,5 +86,17 @@ public class CarController {
     public JSONResult insertCar(Car car) {
         carService.insertCar(car);
         return JSONResult.ok();
+    }
+
+    @PostMapping("addStockById")
+    public JSONResult addStockById(@RequestBody @Valid AddStockDto dto) {
+        JSONResult result = carService.addStockById(dto);
+        return result;
+    }
+
+    @PostMapping("buyCar")
+    public JSONResult buyCar(@RequestBody @Valid BuyCarDto dto) {
+        JSONResult result = carService.customerBuyCar(dto);
+        return result;
     }
 }
