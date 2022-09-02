@@ -1,5 +1,6 @@
 package com.jkxy.car.api.dao;
 
+import com.jkxy.car.api.pojo.dto.FuzzyQueryDaoDto;
 import com.jkxy.car.api.pojo.model.CarCustomerModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,5 +24,7 @@ public interface CarCustomerDao {
     int buyCar(@Param("model") CarCustomerModel model);
 
     List<CarCustomerModel> getStockByIds(@Param("list") List<Integer> ids);
+
+    List<CarCustomerModel> fuzzyQueryByCarSeries(@Param("carSeries") String carSeries);
 
 }

@@ -1,6 +1,7 @@
 package com.jkxy.car.api.service;
 
 import com.jkxy.car.api.pojo.dto.BuyCarDto;
+import com.jkxy.car.api.pojo.dto.FuzzyQueryDto;
 import com.jkxy.car.api.pojo.model.Car;
 import com.jkxy.car.api.pojo.dto.AddStockDto;
 import com.jkxy.car.api.utils.JSONResult;
@@ -25,5 +26,7 @@ public interface CarService {
     JSONResult addStockById(AddStockDto dto);
 
     JSONResult customerBuyCar(BuyCarDto dto);
+
+    JSONResult fuzzyQueryByCarSeries(FuzzyQueryDto dto);
 
 }

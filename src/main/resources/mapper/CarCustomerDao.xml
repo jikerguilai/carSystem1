@@ -21,9 +21,20 @@
     </update>
 
     <select id="getStockByIds" parameterType="java.util.ArrayList" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
-        select * from car_customer where
+        select *
+        from car_customer
+        where
         <foreach collection ="list" item="item" separator ="or">
             id=#{item}
         </foreach>
+    </select>
+
+    <select id="fuzzyQueryByCarSeries" parameterType="java.lang.Integer" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select *
+        from car_customer
+        where 1 = 1
+        <if test="carSeries != null and carSeries != ''">
+            and concat(carSeries) like concat('%',#{carSeries},'%')
+        </if>
     </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.jkxy.car.api.controller;
 
 import com.jkxy.car.api.pojo.dto.AddStockDto;
 import com.jkxy.car.api.pojo.dto.BuyCarDto;
+import com.jkxy.car.api.pojo.dto.FuzzyQueryDto;
 import com.jkxy.car.api.pojo.model.Car;
 import com.jkxy.car.api.service.CarService;
 import com.jkxy.car.api.utils.JSONResult;
@@ -97,6 +98,12 @@ public class CarController {
     @PostMapping("buyCar")
     public JSONResult buyCar(@RequestBody @Valid BuyCarDto dto) {
         JSONResult result = carService.customerBuyCar(dto);
+        return result;
+    }
+
+    @PostMapping("fuzzyQueryByCarSeries")
+    public JSONResult fuzzyQueryByCarSeries(@RequestBody @Valid FuzzyQueryDto dto) {
+        JSONResult result = carService.fuzzyQueryByCarSeries(dto);
         return result;
     }
 }
