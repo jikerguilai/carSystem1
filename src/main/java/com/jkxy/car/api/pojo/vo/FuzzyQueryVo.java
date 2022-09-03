@@ -29,6 +29,6 @@ public class FuzzyQueryVo {
     private Integer lastPage;
 
     @JsonProperty("resultList")
-    private List<CarCustomerModel> resultList;
+    private List<?> resultList;
 
 }

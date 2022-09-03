@@ -89,21 +89,43 @@ public class CarController {
         return JSONResult.ok();
     }
 
+    /**
+     * @param dto
+     * @return
+     * @description 根据车辆id添加库存
+     */
     @PostMapping("addStockById")
     public JSONResult addStockById(@RequestBody @Valid AddStockDto dto) {
-        JSONResult result = carService.addStockById(dto);
-        return result;
+        return carService.addStockById(dto);
     }
 
+    /**
+     * @param dto
+     * @return
+     * @description 购车
+     */
     @PostMapping("buyCar")
     public JSONResult buyCar(@RequestBody @Valid BuyCarDto dto) {
-        JSONResult result = carService.customerBuyCar(dto);
-        return result;
+        return carService.customerBuyCar(dto);
     }
 
-    @PostMapping("fuzzyQueryByCarSeries")
-    public JSONResult fuzzyQueryByCarSeries(@RequestBody @Valid FuzzyQueryDto dto) {
-        JSONResult result = carService.fuzzyQueryByCarSeries(dto);
-        return result;
+    /**
+     * @param dto
+     * @return
+     * @description 模糊查询car_customer表数据
+     */
+    @PostMapping("fuzzyQueryCarCustomerByKeyWord")
+    public JSONResult fuzzyQueryCarCustomerByKeyWord(@RequestBody @Valid FuzzyQueryDto dto) {
+        return carService.fuzzyQueryCarCustomerByKeyWord(dto);
+    }
+
+    /**
+     * @param dto
+     * @return
+     * @description 模糊查询carmessage表数据
+     */
+    @PostMapping("fuzzyQueryCarByKeyWord")
+    public JSONResult fuzzyQueryCarByKeyWord(@RequestBody @Valid FuzzyQueryDto dto) {
+        return carService.fuzzyQueryCarByKeyWord(dto);
     }
 }

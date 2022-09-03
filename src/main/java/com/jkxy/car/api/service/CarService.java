@@ -27,6 +27,8 @@ public interface CarService {
 
     JSONResult customerBuyCar(BuyCarDto dto);
 
-    JSONResult fuzzyQueryByCarSeries(FuzzyQueryDto dto);
+    JSONResult fuzzyQueryCarCustomerByKeyWord(FuzzyQueryDto dto);
+
+    JSONResult fuzzyQueryCarByKeyWord(FuzzyQueryDto dto);
 
 }

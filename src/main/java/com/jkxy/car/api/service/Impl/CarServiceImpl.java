@@ -1,7 +1,6 @@
 package com.jkxy.car.api.service.Impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jkxy.car.api.dao.CarCustomerDao;
 import com.jkxy.car.api.dao.CarDao;
 import com.jkxy.car.api.pojo.dto.AddStockDto;
@@ -20,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service("carService")
@@ -139,27 +137,20 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public JSONResult fuzzyQueryByCarSeries(FuzzyQueryDto dto) {
+    public JSONResult fuzzyQueryCarCustomerByKeyWord(FuzzyQueryDto dto) {
         String keyWord = dto.getKeyWord();
         Integer pageSize = dto.getPageSize();
         Integer pageNum = dto.getPageNum();
         Integer total = 0;
-        if (null == pageSize) {
-            return JSONResult.errorParamMsg("pageSize不能为空");
-        } else if (pageSize <= 0) {
-            return JSONResult.errorParamMsg("pageSize不能小于等于0");
+        JSONResult result = this.checkParam(dto);
+        if (null != result) {
+            return result;
         }
-        if (null == pageNum) {
-            return JSONResult.errorParamMsg("pageNum不能为空");
-        } else if (pageNum <= 0) {
-            return JSONResult.errorParamMsg("pageNum不能小于等于0");
-        }
-
         FuzzyQueryDaoDto daoDto = new FuzzyQueryDaoDto();
-        daoDto.setCarSeries(daoDto.getCarSeries());
+        daoDto.setKeyWord(daoDto.getKeyWord());
         daoDto.setPageSize(pageSize);
         daoDto.setPageNum(pageNum);
-        List<CarCustomerModel> list = carCustomerDao.fuzzyQueryByCarSeries(keyWord);
+        List<CarCustomerModel> list = carCustomerDao.fuzzyQueryCarCustomerByKeyWord(keyWord);
         if (null != list && list.size() > 0) {
             total += list.size();
             Integer startIndex = pageSize * (pageNum - 1);
@@ -173,5 +164,51 @@ public class CarServiceImpl implements CarService {
         vo.setLastPage(total / pageSize + 1);
         vo.setResultList(list);
         return JSONResult.ok(vo);
+    }
+
+    @Override
+    public JSONResult fuzzyQueryCarByKeyWord(FuzzyQueryDto dto) {
+        String keyWord = dto.getKeyWord();
+        Integer pageSize = dto.getPageSize();
+        Integer pageNum = dto.getPageNum();
+        Integer total = 0;
+        JSONResult result = this.checkParam(dto);
+        if (null != result) {
+            return result;
+        }
+        FuzzyQueryDaoDto daoDto = new FuzzyQueryDaoDto();
+        daoDto.setKeyWord(daoDto.getKeyWord());
+        daoDto.setPageSize(pageSize);
+        daoDto.setPageNum(pageNum);
+        List<Car> list = carCustomerDao.fuzzyQueryCarByKeyWord(keyWord);
+        if (null != list && list.size() > 0) {
+            total += list.size();
+            Integer startIndex = pageSize * (pageNum - 1);
+            Integer endIndex = startIndex + pageSize * pageNum;
+            list = list.stream().skip(startIndex).limit(endIndex).collect(Collectors.toList());
+        }
+        FuzzyQueryVo vo = new FuzzyQueryVo();
+        vo.setTotal(total);
+        vo.setPageSize(pageSize);
+        vo.setPageNum(pageNum);
+        vo.setLastPage(total / pageSize + 1);
+        vo.setResultList(list);
+        return JSONResult.ok(vo);
+    }
+
+    private JSONResult checkParam(FuzzyQueryDto dto) {
+        Integer pageSize = dto.getPageSize();
+        Integer pageNum = dto.getPageNum();
+        if (null == pageSize) {
+            return JSONResult.errorParamMsg("pageSize不能为空");
+        } else if (pageSize <= 0) {
+            return JSONResult.errorParamMsg("pageSize不能小于等于0");
+        }
+        if (null == pageNum) {
+            return JSONResult.errorParamMsg("pageNum不能为空");
+        } else if (pageNum <= 0) {
+            return JSONResult.errorParamMsg("pageNum不能小于等于0");
+        }
+        return null;
     }
 }

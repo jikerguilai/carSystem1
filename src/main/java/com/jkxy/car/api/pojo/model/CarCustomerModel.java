@@ -13,8 +13,8 @@ public class CarCustomerModel {
     private Integer id;
     private String carSeries;
     private String carName;
-    private Date addCarTime;
-    private Date buyCarTime;
+    private String addCarTime;
+    private String buyCarTime;
     private String customer;
     private String sold; // 0：未售出；1：已售出
 }

@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class FuzzyQueryDaoDto {
-    private String carSeries;
+    private String keyWord;
     private Integer pageSize;
     private Integer pageNum;
 }
