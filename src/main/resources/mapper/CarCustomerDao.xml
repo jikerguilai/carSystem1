@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkxy.car.api.dao.CarCustomerDao">
+    <insert id="insertCarInfo" parameterType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        insert
+        into car_customer(carSeries,carName,addCarTime)
+        values (#{model.carSeries},#{model.carName},CURTIME())
+    </insert>
+
+    <select id="getStockCar" parameterType="java.lang.String" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select *
+        from car_customer
+        where sold=0
+          and carSeries=#{carSeries}
+    </select>
+
+    <update id="buyCar" parameterType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        update car_customer
+        set buyCarTime=CURTIME(),customer=#{model.customer},sold=#{model.sold}
+        where id=#{model.id}
+    </update>
+
+    <select id="getStockByIds" parameterType="java.util.ArrayList" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select *
+        from car_customer
+        where
+        <foreach collection ="list" item="item" separator ="or">
+            id=#{item}
+        </foreach>
+    </select>
+
+    <select id="fuzzyQueryCarCustomerByKeyWord" parameterType="java.lang.String" resultType="com.jkxy.car.api.pojo.model.CarCustomerModel">
+        select
+            distinct *
+        from car_customer
+        where 1 = 1
+        <if test="keyWord != null and keyWord != ''">
+            and (concat(carSeries) like concat('%',#{keyWord},'%')
+            or concat(carName) like concat('%',#{keyWord},'%')
+            or concat(customer) like concat('%',#{keyWord},'%')
+            )
+        </if>
+    </select>
+
+    <select id="fuzzyQueryCarByKeyWord" parameterType="java.lang.String" resultType="com.jkxy.car.api.pojo.model.Car">
+        select
+        distinct *
+        from carmessage
+        where 1 = 1
+        <if test="keyWord != null and keyWord != ''">
+            and (concat(carSeries) like concat('%',#{keyWord},'%')
+            or concat(carName) like concat('%',#{keyWord},'%')
+            or concat(carType) like concat('%',#{keyWord},'%')
+            )
+        </if>
+    </select>
+</mapper>

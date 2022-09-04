@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkxy.car.api.dao.InitDao">
+    <insert id="insertInitDate1">
+        INSERT
+        INTO carmessage
+        VALUES
+            ('1', '奥迪', '中型车', '28.5-70.0万', 'A6L',0),
+            ('2', '宝马', 'SUV', '30.8-56.3万', 'X1',0),
+            ('3', '奔驰', '中型车', '28.5-70.0万', 'C级',0),
+            ('4', '宾利', '轿车', '128.5-170.0万', '高级',0),
+            ('5', '别克', 'SUV', '17.9-27.9万', '昂科威',0),
+            ('6', '别克', '轿车', '16.9-24.9万', '君威',0),
+            ('7', '凯迪拉克', 'SUV', '35.5-45.0万', 'XT5',0),
+            ('8', '凯迪拉克', 'B级轿车', '128.5-170.0万', 'CT6',0),
+            ('9', '雪佛兰', '大型SUV', '128.5-170.0万', '萨博班',0),
+            ('10', '雪佛兰', '跑车', '128.5-180.0万', '克尔维特',0)
+    </insert>
+
+</mapper>

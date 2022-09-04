@@ -1,6 +1,7 @@
 package com.jkxy.car.api.dao;
 
-import com.jkxy.car.api.pojo.Car;
+import com.jkxy.car.api.pojo.model.Car;
+import com.jkxy.car.api.pojo.model.CarCustomerModel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -25,4 +26,12 @@ public interface CarDao {
 
     @Insert("insert into carMessage(carName,carType,price,carSeries) values(#{carName},#{carType},#{price},#{carSeries})")
     void insertCar(Car car);
+
+    @Update("update carMessage set stock=#{stock} where id=#{id}")
+    int updateCarStockById(Integer id, Integer stock);
+
+    @Select("select * from carMessage where carSeries=#{carSeries}")
+    Car findByCarSeries(String carSeries);
+
+
 }

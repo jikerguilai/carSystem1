@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkxy.car.api.dao.InitDao">
+    <update id="dropTable1">
+        DROP TABLE IF EXISTS carmessage
+    </update>
+
+    <update id="dropTable2">
+        DROP TABLE IF EXISTS car_customer
+    </update>
+
+    <update id="createTable1">
+        CREATE TABLE carmessage (
+            id int(100) NOT NULL AUTO_INCREMENT,
+            carName varchar(100) NOT NULL,
+            carType varchar(100) NOT NULL,
+            price varchar(100) NOT NULL,
+            carSeries varchar(100) NOT NULL,
+            stock INT(100) DEFAULT 0 null COMMENT '库存数量',
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+    </update>
+
+    <update id="createTable2">
+        CREATE
+        TABLE car_customer
+        (id int auto_increment NOT NULL,
+        carSeries varchar(100) NOT NULL,
+        carName varchar(100) NOT NULL,
+        addCarTime varchar(100) NOT null COMMENT '入库时间',
+        buyCarTime varchar(100) null COMMENT '购车时间',
+        customer varchar(100) null COMMENT '顾客姓名',
+        sold varchar(100) DEFAULT 0 NULL COMMENT '0：未售出；1：已售出',
+        CONSTRAINT car_customer_pk PRIMARY KEY (id))
+        ENGINE=InnoDB
+        DEFAULT CHARSET=utf8mb4
+        COLLATE=utf8mb4_0900_ai_ci
+    </update>
+
+</mapper>
