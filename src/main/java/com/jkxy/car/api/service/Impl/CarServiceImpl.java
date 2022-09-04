@@ -94,13 +94,13 @@ public class CarServiceImpl implements CarService {
         String carSeries = dto.getCarSeries();
         Integer count = dto.getCount();
         if (StringUtils.isEmpty(customer)) {
-            return JSONResult.errorParamMsg("请输入有效的顾客姓名");
+            return JSONResult.errorParamMsg("请输入顾客姓名");
         }
         if (StringUtils.isEmpty(carSeries)) {
-            return JSONResult.errorParamMsg("请输入意向车型");
+            return JSONResult.errorParamMsg("请输入车型");
         }
         if (0 >= count) {
-            return JSONResult.errorParamMsg("购买数量要大于等于0");
+            return JSONResult.errorParamMsg("购买数量要大于0");
         }
         Car aimCar = carDao.findByCarSeries(carSeries);
         if (null == aimCar || 0 >= aimCar.getStock()) {
